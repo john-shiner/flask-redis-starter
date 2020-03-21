@@ -2,6 +2,11 @@
 
 app.py == minimal python flask/redis web app
 
+To check code quality locally, you can run flake in a container:
+* alias flake="docker run -ti --rm -v $(pwd):/apps alpine/flake8:3.5.0"
+* flake --help
+* flake app.py
+
 Dockerfile ==  builds that app as a container (based on python 3.8 image)
 
 docker-compose.yml == assembles the flask and redis containers into an application
