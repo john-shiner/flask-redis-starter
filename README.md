@@ -16,4 +16,4 @@ Usage:
 
 * docker-compose down  # stop the app, remove the containers (not the images)
 
-Open/refresh http://localhost:5000 to see the app
+Open/refresh http://localhost:8000 to see the app
