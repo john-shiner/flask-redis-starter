@@ -13,8 +13,8 @@ from wtforms.validators import DataRequired
 # from ent_config import config
 
 # Database Connection
-# host = config.REDIS_CFG["host"]
-# port = config.REDIS_CFG["port"]
+host = "127.0.0.1"
+port = 6379
 # pwd = config.REDIS_CFG["password"]
 # db = config.REDIS_CFG["db"]
 # redis = Redis(db=db, host=host, port=port, password=pwd,
@@ -30,7 +30,7 @@ TITLE = "My Quick App"
 DESC = "Flask and Redis Integration Demo"
 status = "All is well... truly"
 
-redis = Redis(host='redis', port=6379, charset="utf-8", decode_responses=True)
+redis = Redis(host=host, port=port, charset="utf-8", decode_responses=True)
 
 
 class NameForm(FlaskForm):

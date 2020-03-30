@@ -1,0 +1,6 @@
+#! /bin/sh
+
+docker login -u $DOCKER_LOGIN  -p $DOCKER_PASSWORD docker.io
+
+docker tag  web johnshiner/flask-redis-frontend:v0
+docker push johnshiner/flask-redis-frontend:v0
