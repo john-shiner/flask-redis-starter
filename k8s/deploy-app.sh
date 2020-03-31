@@ -7,3 +7,4 @@ minikube service list
 
 date >> log.txt
 minikube service list >>log.txt
+minikube service web
