@@ -32,5 +32,5 @@ Open/refresh http://localhost:8000 to see the app
 * scale-web.sh count    # sets the web deployment replicas to 'count'
 * redis-client.sh       # invokes redis client for exposed redis ports
 
-# after running deploy-app.sh script, run 'minikube services' to get exposed ports
+After running deploy-app.sh script, run 'minikube services' to get exposed ports
 
