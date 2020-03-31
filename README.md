@@ -27,9 +27,10 @@ Open/refresh http://localhost:8000 to see the app
 
 ### k8s/ Commands
 
-* deploy-app.sh
-* remove-app.sh
-* scale-web.sh
+* deploy-app.sh         # brings up the application stack
+* remove-app.sh         # brings down the application stack
+* scale-web.sh <count>  # sets the web deployment replicas to <count>
+* redis-client.sh       #invokes redis client for exposed redis ports
 
 # after deploy script, running 'minikube services' to get exposed ports
 
@@ -45,10 +46,3 @@ Mon Mar 30 12:10:46 CDT 2020
 | kubernetes-dashboard | kubernetes-dashboard      | No node port |
 |----------------------|---------------------------|--------------|-----------------------------|
 
-# using redis-cli
-
-| => redis-cli -h '192.168.99.100' -p 30059
-192.168.99.100:30059> keys *
-1) "_app:db:test"
-2) "hits"
-192.168.99.100:30059>
