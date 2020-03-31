@@ -1,4 +1,4 @@
-# Minimal app with docker-compose, python3, flask, redis
+# Minimal app with docker-compose, k8s, python3, flask, redis
 
 app.py == minimal python flask/redis web app
 
@@ -29,20 +29,8 @@ Open/refresh http://localhost:8000 to see the app
 
 * deploy-app.sh         # brings up the application stack
 * remove-app.sh         # brings down the application stack
-* scale-web.sh <count>  # sets the web deployment replicas to <count>
-* redis-client.sh       #invokes redis client for exposed redis ports
+* scale-web.sh count    # sets the web deployment replicas to 'count'
+* redis-client.sh       # invokes redis client for exposed redis ports
 
-# after deploy script, running 'minikube services' to get exposed ports
-
-Mon Mar 30 12:10:46 CDT 2020
-|----------------------|---------------------------|--------------|-----------------------------|
-|      NAMESPACE       |           NAME            | TARGET PORT  |             URL             |
-|----------------------|---------------------------|--------------|-----------------------------|
-| default              | kubernetes                | No node port |
-| default              | redis                     |              | http://192.168.99.100:30059 |
-| default              | web                       |              | http://192.168.99.100:30149 |
-| kube-system          | kube-dns                  | No node port |
-| kubernetes-dashboard | dashboard-metrics-scraper | No node port |
-| kubernetes-dashboard | kubernetes-dashboard      | No node port |
-|----------------------|---------------------------|--------------|-----------------------------|
+# after running deploy-app.sh script, run 'minikube services' to get exposed ports
 
