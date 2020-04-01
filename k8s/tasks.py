@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Run these tasks from the project k8s/ directory"""
 from invoke import task
 
 @task
