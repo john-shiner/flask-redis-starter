@@ -25,12 +25,17 @@ Open/refresh http://localhost:8000 to see the app
 
 ## Kubernetes (minikube)
 
-### k8s/ Commands
+### Minikube deployment commands (run from k8s directory)
 
-* deploy-app.sh         # brings up the application stack
-* remove-app.sh         # brings down the application stack
-* scale-web.sh count    # sets the web deployment replicas to 'count'
-* redis-client.sh       # invokes redis client for exposed redis ports
+Invoke (inv) commands
 
-After running deploy-app.sh script, run 'minikube services' to get exposed ports
+* inv deploy            # brings up the application stack
+* inv undeploy          # brings down the application stack
+* inv scale -n <count>  # sets the web deployment replicas to 'count'
+
+Redis client starter script
+
+* ./redis-client.sh     # invokes redis client for exposed redis ports
+
+After running the deploy command, run 'minikube services' to get exposed ports
 
