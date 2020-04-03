@@ -2,6 +2,14 @@
 """Run these tasks from the project k8s/ directory"""
 from invoke import task
 
+# @task
+# def genredisyml(c):
+#     "try out better use of yaml lables"
+#     # kubectl run db --image=redis --replicas=1 --port=6379 \
+#     #                         --labels='app=redis,role=master,tier=backend' \
+#     #                         --dry-run --output=yaml > new-redis-master-deployment.yaml
+
+
 @task
 def deploy(c):
     "Run this to deploy the application stack to minikube"
@@ -12,9 +20,13 @@ def deploy(c):
     # kubectl create -f ./flask-container-service.yml
     # minikube service list
 
-    c.run("kubectl create -f ./redis-deployment.yml")
-    c.run("kubectl expose deployment redis --port=6379 --target-port=6379 --type=LoadBalancer --name=redis")
-    c.run("kubectl create -f ./flask-container-service.yml")
+    # kubectl expose deployment db --selector='app=redis,role=master,tier=backend' \
+    #                             --dry-run --output=yaml > new-redis-service.yaml
+
+    c.run("kubectl create -f ./new-redis-deployment.yml")
+    c.run("kubectl create -f ./new-redis-service.yml")
+    c.run("kubectl create -f ./web-flask-deployment.yml")
+    c.run("kubectl create -f ./web-flask-service.yml")
     c.run("minikube service list")
 
     c.run("date >> log.txt")

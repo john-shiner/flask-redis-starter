@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: web
+    tier: frontend
+  name: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+      tier: frontend
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: web
+        tier: frontend
+    spec:
+      containers:
+      - image: johnshiner/flask-redis-frontend:v1
+        name: web
+        ports:
+        - containerPort: 5000
+        resources: {}
+status: {}
