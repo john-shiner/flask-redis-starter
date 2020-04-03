@@ -30,7 +30,7 @@ TITLE = "My Quick App"
 DESC = "Flask and Redis Integration Demo"
 status = "All is well... truly"
 
-redis = Redis(host='redis', port=6379, charset="utf-8", decode_responses=True)
+redis = Redis(host="redis", charset="utf-8", decode_responses=True)
 
 
 class NameForm(FlaskForm):

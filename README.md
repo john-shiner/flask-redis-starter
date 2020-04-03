@@ -1,4 +1,4 @@
-# Minimal app with docker-compose, python3, flask, redis
+# Minimal app with docker-compose, k8s, python3, flask, redis
 
 app.py == minimal python flask/redis web app
 
@@ -22,3 +22,20 @@ Usage:
 * docker-compose down  # stop the app, remove the containers (not the images)
 
 Open/refresh http://localhost:8000 to see the app
+
+## Kubernetes (minikube)
+
+### Minikube deployment commands (run from k8s directory)
+
+Invoke (inv) commands
+
+* inv deploy            # brings up the application stack
+* inv undeploy          # brings down the application stack
+* inv scale -n <count>  # sets the web deployment replicas to 'count'
+
+Redis client starter script
+
+* ./redis-client.sh     # invokes redis client for exposed redis ports
+
+After running the deploy command, run 'minikube services' to get exposed ports
+

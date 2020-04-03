@@ -1,0 +1,7 @@
+#! /bin/sh
+
+docker login -u $DOCKER_LOGIN  -p $DOCKER_PASSWORD docker.io
+
+docker tag  flask-redis-starter_web johnshiner/flask-redis-frontend:v1
+docker push johnshiner/flask-redis-frontend:v1
+minikube cache add johnshiner/flask-redis-frontend:v1
