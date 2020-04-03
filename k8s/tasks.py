@@ -5,8 +5,9 @@ from invoke import task
 @task
 def deploy(c):
     "Run this to deploy the application stack to minikube"
-    c.run("kubectl create -f ./redis-deployment.yml")
-    c.run("kubectl expose deployment redis --port=6379 --target-port=6379 --type=LoadBalancer --name=redis")
+    # c.run("kubectl create -f ./redis-deployment.yml")
+    # c.run("kubectl expose ExternalName --name="redis" --type=ExternalName ")
+    c.run("kubectl create -f ./redis-service.yml")
     c.run("kubectl create -f ./flask-container-service.yml")
     c.run("minikube service list")
 
@@ -25,14 +26,6 @@ def undeploy(c):
     c.run("kubectl get pods >> log.txt")
 
 @task
-def db(c):
-    "Run the output of this command for Redis-cli access"
-    str = "redis-cli -h $(minikube ip) -p $(kubectl get service redis --output='jsonpath={.spec.ports[0].nodePort}')"
-    c.run("echo {}".format(str))
-
-    # c.run(str)
-
-@task
 def scale(c, num=3):
     "Run this to scale the web pods to <num> replicas"
     str = "kubectl scale --replicas={} deployment web".format(num)
@@ -42,3 +35,28 @@ def scale(c, num=3):
     c.run(str)
     c.run("kubectl get pods >> log.txt")
 
+@task
+def db(c):
+    "Run the output of this command for Redis-cli access"
+    str = "        redis-cli -h $(minikube ip) -p $(kubectl get service redis --output='jsonpath={.spec.ports[0].nodePort}')"
+    c.run("echo {}".format(str))
+
+    # c.run(str)
+
+@task
+def dbport(c):
+    "Run this to return the exposed port for the redis service"
+    str = "kubectl get service redis --output='jsonpath={.spec.ports[0].nodePort}'"
+    print("----")
+    c.run(str)
+    print("    ")
+    print("    ")
+
+@task
+def webport(c):
+    "Run this to return the exposed port for the web service"
+    str = "kubectl get service web --output='jsonpath={.spec.ports[0].nodePort}'"
+    print("----")
+    c.run(str)
+    print("    ")
+    print("    ")
