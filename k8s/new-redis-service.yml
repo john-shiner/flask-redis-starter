@@ -4,7 +4,6 @@ metadata:
   creationTimestamp: null
   labels:
     app: redis
-    role: master
     tier: backend
   name: redis
 spec:
@@ -14,7 +13,6 @@ spec:
     targetPort: 6379
   selector:
     app: redis
-    role: master
     tier: backend
   type: LoadBalancer
 status:

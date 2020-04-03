@@ -55,7 +55,7 @@ def scale(c, num=3):
 
 @task
 def db(c):
-    "Run the output of this command for Redis-cli access"
+    "Run the output of this command for a parameterized Redis-cli command string"
     str = "        redis-cli -h $(minikube ip) -p $(kubectl get service redis --output='jsonpath={.spec.ports[0].nodePort}')"
     c.run("echo {}".format(str))
 
@@ -78,3 +78,10 @@ def webport(c):
     c.run(str)
     print("    ")
     print("    ")
+
+@task
+def dash(c):
+    "Run this to launch the minikube dashboard"
+    str = "minikube dashboard"
+    c.run(str)
+
