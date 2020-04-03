@@ -21,7 +21,10 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: johnshiner/flask-redis-frontend:v1
+      - env:
+        - name: GET_HOSTS_FROM
+          value: dns
+        image: johnshiner/frontend:v1
         name: web
         ports:
         - containerPort: 5000
