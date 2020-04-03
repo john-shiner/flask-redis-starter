@@ -29,7 +29,7 @@ spec:
     spec:
       containers:      
       - name: web
-        image: johnshiner/flask-redis-frontend:v0
+        image: johnshiner/flask-redis-frontend:v1
         env:       
           - name: "REDIS_HOST"
             value: "localhost"
