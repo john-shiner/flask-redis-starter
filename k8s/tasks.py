@@ -5,9 +5,15 @@ from invoke import task
 @task
 def deploy(c):
     "Run this to deploy the application stack to minikube"
-    # c.run("kubectl create -f ./redis-deployment.yml")
-    # c.run("kubectl expose ExternalName --name="redis" --type=ExternalName ")
-    c.run("kubectl create -f ./redis-service.yml")
+
+    # replaces this script
+    # kubectl create -f ./redis-deployment.yml
+    # kubectl expose deployment redis --port=6379 --target-port=6379 --type=LoadBalancer --name=redis
+    # kubectl create -f ./flask-container-service.yml
+    # minikube service list
+
+    c.run("kubectl create -f ./redis-deployment.yml")
+    c.run("kubectl expose deployment redis --port=6379 --target-port=6379 --type=LoadBalancer --name=redis")
     c.run("kubectl create -f ./flask-container-service.yml")
     c.run("minikube service list")
 
