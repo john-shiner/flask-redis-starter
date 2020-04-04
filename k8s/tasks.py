@@ -9,7 +9,11 @@ from invoke import task
     #                         --labels='app=redis,tier=backend' \
     #                         --dry-run --output=yaml > new-redis-deployment-xx2.yaml
 
-
+@task
+def gh(c):
+    "Open the current github branch on GitHub"
+    c.run("open $(git remote -v | cut -f 1 -d ' ' |cut -f 2 | sed 1d | cut -d '.' -f1-2)/tree/$(git rev-parse --abbrev-ref HEAD)")
+    
 @task
 def deploy(c):
     "Run this to deploy the application stack to minikube"
