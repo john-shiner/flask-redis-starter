@@ -5,22 +5,16 @@ from invoke import task
 # @task
 # def genredisyml(c):
 #     "try out better use of yaml lables"
-#     # kubectl run db --image=redis --replicas=1 --port=6379 \
-#     #                         --labels='app=redis,role=master,tier=backend' \
-#     #                         --dry-run --output=yaml > new-redis-master-deployment.yaml
+    # kubectl run db --image=redis --replicas=1 --port=6379 \
+    #                         --labels='app=redis,tier=backend' \
+    #                         --dry-run --output=yaml > new-redis-deployment-xx2.yaml
 
 
 @task
 def deploy(c):
     "Run this to deploy the application stack to minikube"
 
-    # replaces this script
-    # kubectl create -f ./redis-deployment.yml
-    # kubectl expose deployment redis --port=6379 --target-port=6379 --type=LoadBalancer --name=redis
-    # kubectl create -f ./flask-container-service.yml
-    # minikube service list
-
-    # kubectl expose deployment db --selector='app=redis,role=master,tier=backend' \
+    # kubectl expose deployment db --selector='app=redis,tier=backend' \
     #                             --dry-run --output=yaml > new-redis-service.yaml
 
     c.run("kubectl create -f ./new-redis-deployment.yml")
@@ -35,9 +29,10 @@ def deploy(c):
 
 @task 
 def undeploy(c):
-    "Run this to remove the application stack from minikube"
-    c.run("kubectl delete service web redis")
-    c.run("kubectl delete deployment web redis")
+    "Run this to remove (all) the application stack(s) from minikube"
+    # c.run("kubectl delete service web redis")
+    # c.run("kubectl delete deployment web redis")
+    c.run("kubectl delete all --all")
 
     c.run("date >> log.txt")
     c.run("echo 'removed app' >> log.txt")
