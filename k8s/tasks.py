@@ -15,6 +15,11 @@ def gh(c):
     c.run("open $(git remote -v | cut -f 1 -d ' ' |cut -f 2 | sed 1d | cut -d '.' -f1-2)/tree/$(git rev-parse --abbrev-ref HEAD)")
     
 @task
+def st(c):
+    "Open the current repository in Sublime Text"
+    c.run("subl ..")
+    
+@task
 def deploy(c):
     "Run this to deploy the application stack to minikube"
 
