@@ -29,15 +29,15 @@ Open/refresh http://localhost:8000 to see the app
 
 Invoke (inv) commands
 
-*  dash       Run this to launch the minikube dashboard
-*  db         Output of this command is a parameterized Redis-cli command string
-*  dbport     Run this to return the exposed port for the redis service
-*  deploy     Run this to deploy the application stack to minikube
-*  gh         Open the current github branch on GitHub
-*  scale      Run this to scale the web pods to <num> replicas
-*  st         Open the current repository in Sublime Text
-*  undeploy   Run this to remove (all) the application stack(s) from minikube
-*  webport    Run this to return the exposed port for the web service
+*  dash       - Run this to launch the minikube dashboard
+*  db         - Output of this command is a parameterized Redis-cli command string
+*  dbport     - Run this to return the exposed port for the redis service
+*  deploy     - Run this to deploy the application stack to minikube
+*  gh         - Open the current github branch on GitHub
+*  scale -n <#web replicas> - Scale the web pods to the desired number of replicas
+*  st         - Open the current repository in Sublime Text
+*  undeploy   - Run this to remove (all) the application stack(s) from minikube
+*  webport    - Run this to return the exposed port for the web service
 
 After running the deploy command, run 'minikube services' to get exposed ports
 
