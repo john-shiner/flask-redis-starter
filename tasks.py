@@ -1,6 +1,14 @@
 #!/usr/bin/python3
 """Run these tasks from the project k8s/ directory"""
 from invoke import task
+import os
+
+os.environ["INV_PATH"]="/Users/john/Documents/gitprojects/flask-redis-starter"
+redis_depl = "$INV_PATH/k8s/new-redis-deployment.yml"
+redis_svc = "$INV_PATH/k8s/new-redis-service.yml"
+web_depl = "$INV_PATH/k8s/web-flask-deployment.yml"
+web_svc = "$INV_PATH/k8s/web-flask-service.yml"
+tasks_log = "$INV_PATH/k8s/log.txt"
 
 # @task
 # def genredisyml(c):
@@ -15,20 +23,27 @@ def gh(c):
     c.run("open $(git remote -v | cut -f 1 -d ' ' |cut -f 2 | sed 1d | cut -d '.' -f1-2)/tree/$(git rev-parse --abbrev-ref HEAD)")
     
 @task
+def st(c):
+    "Open the current repository in Sublime Text"
+    c.run("subl $INV_PATH")
+    
+@task
 def deploy(c):
     "Run this to deploy the application stack to minikube"
 
     # kubectl expose deployment db --selector='app=redis,tier=backend' \
     #                             --dry-run --output=yaml > new-redis-service.yaml
 
-    c.run("kubectl create -f ./new-redis-deployment.yml")
-    c.run("kubectl create -f ./new-redis-service.yml")
-    c.run("kubectl create -f ./web-flask-deployment.yml")
-    c.run("kubectl create -f ./web-flask-service.yml")
+    # redis_depl
+    c.run("kubectl create -f {}".format(redis_depl))
+    c.run("kubectl create -f {}".format(redis_svc))
+    c.run("kubectl create -f {}".format(web_depl))
+    c.run("kubectl create -f {}".format(web_svc))
+
     c.run("minikube service list")
 
-    c.run("date >> log.txt")
-    c.run("minikube service list >>log.txt")
+    c.run("date >> {}".format(tasks_log))
+    c.run("minikube service list >> {}".format(tasks_log))
     c.run("minikube service web")
 
 @task 
@@ -38,19 +53,19 @@ def undeploy(c):
     # c.run("kubectl delete deployment web redis")
     c.run("kubectl delete all --all")
 
-    c.run("date >> log.txt")
-    c.run("echo 'removed app' >> log.txt")
-    c.run("kubectl get pods >> log.txt")
+    c.run("date >> {}".format(tasks_log))
+    c.run("echo 'removed app' >> {}".format(tasks_log))
+    c.run("kubectl get pods >> {}".format(tasks_log))
 
 @task
 def scale(c, num=3):
     "Run this to scale the web pods to <num> replicas"
     str = "kubectl scale --replicas={} deployment web".format(num)
     c.run(str)
-    c.run("date >> log.txt")
-    str = "echo scaled web nodes to {} >> log.txt".format(num)
+    c.run("date >> {}".format(tasks_log))
+    str = "echo scaled web nodes to {} >> {}".format(num, tasks_log)
     c.run(str)
-    c.run("kubectl get pods >> log.txt")
+    c.run("kubectl get pods >> {}".format(tasks_log))
 
 @task
 def db(c):
