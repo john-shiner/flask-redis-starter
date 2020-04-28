@@ -1,9 +1,18 @@
 #!/usr/bin/python3
-"""Run these tasks from the project k8s/ directory"""
+"""Run these tasks from the project directory"""
+
+# point to the appropriate project yml files
+
 from invoke import task
 import os
 
-os.environ["INV_PATH"]="/Users/john/Documents/gitprojects/flask-redis-starter"
+import os
+stream = os.popen('pwd')
+output = stream.read()
+inv_path = output.strip()
+
+os.environ["INV_PATH"]=inv_path
+
 redis_depl = "$INV_PATH/k8s/new-redis-deployment.yml"
 redis_svc = "$INV_PATH/k8s/new-redis-service.yml"
 web_depl = "$INV_PATH/k8s/web-flask-deployment.yml"
